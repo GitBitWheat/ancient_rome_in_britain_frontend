@@ -1,0 +1,14 @@
+.cover-cell {
+    vertical-align: middle !important;
+    position: relative;
+    text-align: center;
+}
+.cover-cell .modal-image-outside {
+    position: absolute;
+    max-height: 85%;
+    height: auto;
+    /* Center the image */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

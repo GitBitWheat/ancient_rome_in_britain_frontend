@@ -1,0 +1,35 @@
+.data-row:hover {
+    background-color: #ebebeb;
+}
+
+.edit-cell {
+    text-align: center;
+}
+
+.edit-controls {
+    color: blue;
+    text-decoration: underline;
+}
+.edit-controls:hover {
+    cursor: pointer;
+}
+
+.tag-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.25vw;
+}
+
+.tag-button.btn {
+    font-size: large;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.data-row-bottom-border {
+    border-bottom: 1px solid #ddd;
+}

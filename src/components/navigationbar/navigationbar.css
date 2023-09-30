@@ -1,0 +1,10 @@
+.fixed-top {
+    position: sticky !important;
+    top: 0px !important;
+}
+
+.navbar.fixed-top {
+    box-shadow: 0px 0px 7.5px rgba(0, 0, 0, 5);
+    border-radius: 0%;
+    background-color: #ffffeb;
+}

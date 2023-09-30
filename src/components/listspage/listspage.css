@@ -1,0 +1,10 @@
+.lists-page-tab-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    width: 50vw;
+    left: 24.5vw;
+}

@@ -1,0 +1,28 @@
+.App {
+    text-align: left;
+    font-size: large;
+    padding-left: 0vw;
+    padding-right: 0vw;
+    min-height: 100vh;
+    height: 100%;
+
+    background-image: url('../public/images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.app-content {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.app-content, .app-content * {
+    z-index: 1;
+}
+
+.dx-datagrid {
+    font-size: large;
+}

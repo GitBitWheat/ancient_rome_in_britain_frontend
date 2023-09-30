@@ -1,0 +1,13 @@
+.info-page-container {
+    padding-top: 50px;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    word-wrap: break-word;
+}
+
+.stroke {
+    font-size: 2rem;
+    color: white;
+    -webkit-text-stroke: black 0.08rem;
+    font-weight: bolder;
+}

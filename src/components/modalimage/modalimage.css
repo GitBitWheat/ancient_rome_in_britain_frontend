@@ -1,0 +1,22 @@
+.modal-content.modal-image-content {
+    background-color: transparent;
+    border: 0;
+}
+
+.modal-body.modal-image-body {
+    position: relative;
+    height: 620px;
+}
+.modal-image-inside {
+    max-height: 600px;
+    height: auto;
+    /* Center the image */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-image-outside {
+    cursor: pointer;
+}

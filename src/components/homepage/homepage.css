@@ -1,0 +1,22 @@
+.home-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-top: 75px;
+    gap: 25px
+}
+
+.title {
+    font-size: 5rem;
+    color: white;
+    -webkit-text-stroke: black 0.2rem;
+    font-weight: bolder;
+    text-align: center;
+    user-select: none;
+}
+
+.home-page-search-bar.search-bar {
+    font-size: 2rem;
+}

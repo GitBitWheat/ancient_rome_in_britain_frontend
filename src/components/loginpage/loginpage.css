@@ -1,0 +1,13 @@
+.login-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.err-msg {
+    color: red;
+    -webkit-text-stroke: black 0.04rem;
+    font-weight: bolder;
+}
