@@ -10,22 +10,22 @@ import './listspage.css';
 
 const lists = [{
     title: 'Tags',
-    serviceURL: 'http://localhost:8080/lists/tag/'
+    serviceURL: 'actions/lists/tag/'
 }, {
     title: 'Age Groups',
-    serviceURL: 'http://localhost:8080/lists/agegroup/'
+    serviceURL: 'actions/lists/agegroup/'
 }, {
     title: 'Genres',
-    serviceURL: 'http://localhost:8080/lists/genre/'
+    serviceURL: 'actions/lists/genre/'
 }, {
     title: 'Website Types',
-    serviceURL: 'http://localhost:8080/lists/websitetype/'
+    serviceURL: 'actions/lists/websitetype/'
 }, {
     title: 'Audiovisual Types',
-    serviceURL: 'http://localhost:8080/lists/audiovisualtype/'
+    serviceURL: 'actions/lists/audiovisualtype/'
 }, {
     title: 'Recreational Types',
-    serviceURL: 'http://localhost:8080/lists/recreationaltype/'
+    serviceURL: 'actions/lists/recreationaltype/'
 }];
 
 const itemTitleRender = entry => entry.title;

@@ -19,12 +19,12 @@ import { valueByKey } from "../../../utils/valuebykey";
 import './entriesgridtemplate.css';
 
 const tagsStore = new RemoteStore({
-    serviceURL: 'http://localhost:8080/lists/tag/',
+    serviceURL: 'actions/lists/tag/',
     data2records: responseData => responseData.list,
     byKey: valueByKey
 });
 const ageGroupsStore = new RemoteStore({
-    serviceURL: 'http://localhost:8080/lists/agegroup/',
+    serviceURL: 'actions/lists/agegroup/',
     data2records: responseData => responseData.list,
     byKey: valueByKey
 });

@@ -1,7 +1,7 @@
 import EntriesRowRenderTemplate from '../entriesrowrendertemplate/entriesrowrendertemplate';
 import ModalImage from '../../modalimage/modalimage';
 
-const imagesServiceURL = 'http://localhost:8080/files/images';
+const imagesServiceURL = 'actions/files/images';
 
 /**
  * @param {import('devextreme/ui/data_grid').RowTemplateData} template

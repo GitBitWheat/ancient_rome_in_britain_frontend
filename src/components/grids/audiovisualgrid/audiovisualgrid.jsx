@@ -12,7 +12,7 @@ import audiovisualRowRender from "./audiovisualrowrender";
 import { valueByKey } from "../../../utils/valuebykey";
 
 const typesStore = new RemoteStore({
-    serviceURL: 'http://localhost:8080/lists/audiovisualtype/',
+    serviceURL: 'actions/lists/audiovisualtype/',
     data2records: responseData => responseData.list,
     byKey: valueByKey
 });
@@ -38,7 +38,7 @@ const AudiovisualGrid = () => {
     const loginCtx = useContext(LoginContext);
 
     const audiovisualStore = new RemoteStore({
-        serviceURL: 'http://localhost:8080/feed/audiovisual/',
+        serviceURL: 'actions/feed/audiovisual/',
         data2records: responseData => responseData.audiovisuals,
         token: loginCtx.token
     });

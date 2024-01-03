@@ -15,7 +15,7 @@ import { valueByKey } from "../../../utils/valuebykey";
 import './booksgrid.css';
 
 const genresStore = new RemoteStore({
-    serviceURL: 'http://localhost:8080/lists/genre/',
+    serviceURL: 'actions/lists/genre/',
     data2records: responseData => responseData.list,
     byKey: valueByKey
 });
@@ -41,7 +41,7 @@ const BooksGrid = () => {
     const loginCtx = useContext(LoginContext);
 
     const booksStore = new RemoteStore({
-        serviceURL: 'http://localhost:8080/feed/book/',
+        serviceURL: 'actions/feed/book/',
         data2records: responseData => responseData.books,
         token: loginCtx.token
     });

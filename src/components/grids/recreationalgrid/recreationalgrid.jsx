@@ -12,7 +12,7 @@ import { LoginContext } from "../../contexts/logincontext";
 import { valueByKey } from "../../../utils/valuebykey";
 
 const typesStore = new RemoteStore({
-    serviceURL: 'http://localhost:8080/lists/recreationaltype/',
+    serviceURL: 'actions/lists/recreationaltype/',
     data2records: responseData => responseData.list,
     byKey: valueByKey
 });
@@ -38,7 +38,7 @@ const RecreationalGrid = () => {
     const loginCtx = useContext(LoginContext);
 
     const websitesStore = new RemoteStore({
-        serviceURL: 'http://localhost:8080/feed/recreational/',
+        serviceURL: 'actions/feed/recreational/',
         data2records: responseData => responseData.recreational,
         token: loginCtx.token
     });

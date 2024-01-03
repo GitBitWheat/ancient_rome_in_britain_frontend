@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import axios from "axios";
 
-const defaultServiceURL = 'http://localhost:8080/files/images';
+const defaultServiceURL = 'actions/files/images';
 
 /**
  * Numeric value custom edit cell

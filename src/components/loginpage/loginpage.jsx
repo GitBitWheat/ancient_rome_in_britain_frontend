@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../contexts/logincontext";
 import './loginpage.css';
 
-const loginURL = 'http://localhost:8080/auth/login/';
+const loginURL = 'actions/auth/login/';
 const config = {
     headers: {
         'Content-Type': 'application/json'
