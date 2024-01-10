@@ -3,32 +3,29 @@ import ModalImage from '../../modalimage/modalimage';
 
 const imagesServiceURL = 'actions/files/images';
 
-/**
- * @param {import('devextreme/ui/data_grid').RowTemplateData} template
- */
-const booksRowRender = (template, addTagFilter, editingEnabled) => {
+const booksRowRender = (data, addTagFilter, editingEnabled) => {
     return (
         <EntriesRowRenderTemplate
-            template={template}
+            data={data}
             addTagFilter={addTagFilter}
             editingEnabled={editingEnabled}
         >
             <td rowSpan={2} className='cover-cell'>
-                {template.data.pic ? (
+                {data.record.pic ? (
                     <ModalImage
-                        src={`${imagesServiceURL}/${template.data.pic}`}
+                        src={`${imagesServiceURL}/${data.record.pic}`}
                         alt='None'
                     />
                 ) : (
                     <span>None</span>
                 )}
             </td>
-            <td>{template.data.name}</td>
-            <td>{template.data.author}</td>
-            <td>{template.data.publisher}</td>
-            <td>{template.data.genre}</td>
-            <td>{template.data.year}</td>
-            <td>{template.data.ageGroup}</td>
+            <td>{data.record.name}</td>
+            <td>{data.record.author}</td>
+            <td>{data.record.publisher}</td>
+            <td>{data.record.genre}</td>
+            <td>{data.record.year}</td>
+            <td>{data.record.ageGroup}</td>
         </EntriesRowRenderTemplate>
     );
 };

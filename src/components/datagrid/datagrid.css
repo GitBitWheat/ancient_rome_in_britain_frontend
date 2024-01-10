@@ -1,0 +1,35 @@
+.datagrid-container {
+    width: 98vw;
+}
+
+.datagrid-toolbar {
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.edit-cell {
+    text-align: center;
+}
+
+.edit-controls {
+    color: blue;
+    text-decoration: underline;
+}
+.edit-controls:hover {
+    cursor: pointer;
+}
+
+.no-border > tr > td {
+    border: 0;
+}
+
+tr.default-row-render-tr {
+    border-bottom: 1px solid #ddd;
+}

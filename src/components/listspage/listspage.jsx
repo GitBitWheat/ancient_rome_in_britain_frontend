@@ -1,10 +1,9 @@
-import { useState, useCallback, useContext } from "react";
-
-import { DataGrid, TabPanel } from "devextreme-react";
-import { Column, Editing, RequiredRule } from "devextreme-react/data-grid";
-import DataSource from "devextreme/data/data_source";
-
-import { RemoteStore } from "../../store/remotestore";
+import { useContext } from "react";
+import { Tabs, Tab } from "react-bootstrap";
+import { DataGrid } from "../datagrid/datagrid";
+import { Editing, Column } from "../datagrid/configs";
+import { DataSource } from "../datasource/datasource";
+import { RemoteStore } from "../datasource/remotestore";
 import { LoginContext } from "../contexts/logincontext";
 import './listspage.css';
 
@@ -28,14 +27,12 @@ const lists = [{
     serviceURL: 'actions/lists/recreationaltype/'
 }];
 
-const itemTitleRender = entry => entry.title;
-
-const ItemComponent = ({ data }) => {
+const ItemComponent = ({ serviceURL }) => {
 
     const loginCtx = useContext(LoginContext);
 
     const store = new RemoteStore({
-        serviceURL: data.serviceURL,
+        serviceURL: serviceURL,
         data2records: responseData => responseData.list,
         token: loginCtx.token
     });
@@ -46,10 +43,10 @@ const ItemComponent = ({ data }) => {
     return (
         <DataGrid
             dataSource={DS}
-            key='_id'
+            keyField='_id'
+            defaultSortBy="value"
         >
             <Editing
-                mode='form'
                 allowAdding={true}
                 allowDeleting={true}
                 allowUpdating={false}
@@ -58,34 +55,26 @@ const ItemComponent = ({ data }) => {
                 dataField="value"
                 dataType="string"
                 caption="Value"
-                sortOrder="asc"
-            >
-                <RequiredRule/>
-            </Column>
+                required
+            />
         </DataGrid>
     )
 };
 
 const ListsPage = () => {
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
-
-    const onSelectionChanged = useCallback(event => {
-        if (event.name === 'selectedIndex') {
-            setSelectedIndex(event.value);
-        }
-    }, []);
-
     return (
         <div className="lists-page-tab-panel">
-            <TabPanel
-                dataSource={lists}
-                selectedIndex={selectedIndex}
-                onOptionChanged={onSelectionChanged}
-                itemTitleRender={itemTitleRender}
-                itemComponent={ItemComponent}
-                showNavButtons={true}
-            />
+            <Tabs
+              defaultActiveKey="Tags"
+              className="mb-3"
+            >
+                {lists.map(({ title, serviceURL }) => (
+                    <Tab eventKey={title} title={title} key={title}>
+                        <ItemComponent serviceURL={serviceURL}/>
+                    </Tab>
+                ))}
+            </Tabs>
         </div>
     );
 };

@@ -1,23 +1,19 @@
-import LinkCell from '../../customcells/linkcell';
 import EntriesRowRenderTemplate from '../entriesrowrendertemplate/entriesrowrendertemplate';
 
-/**
- * @param {import('devextreme/ui/data_grid').RowTemplateData} template
- */
-const websitesRowRender = (template, addTagFilter, editingEnabled) => {
+const websitesRowRender = (data, addTagFilter, editingEnabled) => {
     return (
         <EntriesRowRenderTemplate
-            template={template}
+            data={data}
             addTagFilter={addTagFilter}
             editingEnabled={editingEnabled}
         >
-            <td>{template.data.name}</td>
+            <td>{data.record.name}</td>
             <td>
-                <LinkCell data={{ value: template.data.url }} />
+                <a href={data.record.url}>{data.record.url}</a>
             </td>
-            <td>{template.data.type}</td>
-            <td>{template.data.year}</td>
-            <td>{template.data.ageGroup}</td>
+            <td>{data.record.type}</td>
+            <td>{data.record.year}</td>
+            <td>{data.record.ageGroup}</td>
         </EntriesRowRenderTemplate>
     );
 };

@@ -1,7 +1,4 @@
-import CustomStore from "devextreme/data/custom_store";
 import axios from "axios";
-
-const dummyByKey = _key => {};
 
 const removeTrailingSlash = str => {
     if (str.length === 0) {
@@ -14,14 +11,13 @@ const removeTrailingSlash = str => {
     }
 };
 
-class RemoteStoreParams {
-    constructor(serviceURL, data2records, token, byKey, field2field, keyField) {
+export class RemoteStore {
+    constructor({ serviceURL, data2records, token=null, field2field=[], keyField='_id' }) {
         this.key = keyField;
         this.load =  this.load.bind(this);
         this.insert = this.insert.bind(this);
         this.update = this.update.bind(this);
         this.remove = this.remove.bind(this);
-        this.byKey = byKey.bind(this);
 
         this.data = [];
         this.serviceURL = removeTrailingSlash(serviceURL);
@@ -70,7 +66,6 @@ class RemoteStoreParams {
         for (const [backendField, frontendField] of this.field2field) {
             values[backendField] = values[frontendField];
         }
-        console.log(values)
         return axios.post(this.serviceURL, JSON.stringify(values), this.jsonConfig)
         .then((response) => {
             this.data = this.data.concat(values);
@@ -101,11 +96,5 @@ class RemoteStoreParams {
             this.data = this.data.filter(record => record[this.key] !== key);
             return response.data;
         });
-    }
-};
-
-export class RemoteStore extends CustomStore {
-    constructor({ serviceURL, data2records, token=null, byKey=dummyByKey, field2field=[], keyField='_id' }) {
-        super(new RemoteStoreParams(serviceURL, data2records, token, byKey, field2field, keyField));
     }
 };

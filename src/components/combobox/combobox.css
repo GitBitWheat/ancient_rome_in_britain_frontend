@@ -1,0 +1,10 @@
+.tokens-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.open-combo-box {
+    z-index: 100;
+}

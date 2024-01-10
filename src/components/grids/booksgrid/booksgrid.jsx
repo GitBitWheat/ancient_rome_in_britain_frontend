@@ -1,40 +1,39 @@
 import { useContext } from "react";
 
-import { Column, HeaderFilter, RequiredRule } from "devextreme-react/data-grid";
-import DataSource from "devextreme/data/data_source";
+import { Column } from "../../datagrid/configs";
+import { DataSource } from "../../datasource/datasource";
+import { RemoteStore } from "../../datasource/remotestore";
 
-import { RemoteStore } from "../../../store/remotestore";
 import { LoginContext } from "../../contexts/logincontext";
-import SelectEditCell from "../../customcells/selecteditcell";
+import SelectEditCell from "../../datagrid/editingform/editcells/selecteditcell";
 import EntriesGridTemplate, { EntriesGridTemplateBefore }
     from "../entriesgridtemplate/entriesgridtemplate";
 import booksRowRender from "./booksrowrender";
-import ImageEditCell from "../../customcells/imageeditcell";
-import { valueByKey } from "../../../utils/valuebykey";
+import ImageEditCell from "../../datagrid/editingform/editcells/imageeditcell";
 
 import './booksgrid.css';
 
 const genresStore = new RemoteStore({
     serviceURL: 'actions/lists/genre/',
     data2records: responseData => responseData.list,
-    byKey: valueByKey
 });
 
-const GenresEditCellComponent = ({ data }) => (
+const GenresEditCellComponent = data => (
     <SelectEditCell
         data={data}
-        options={new DataSource({
-            store: genresStore
+        dataSource={new DataSource({
+            store: genresStore,
+            map: ({ value }) => value,
+            sortBy: 'value'
         })}
-        valueExpr='value'
-        displayExpr='value'
+        typeaheadId="genres-edit-cell-component"
     />
 );
 
-const genresHeaderFilters = {
+const genresHeaderFilters = new DataSource({
     store: genresStore,
-    map: ({ _id, value }) => ({ _id: _id, text: value, value: value })
-};
+    map: ({ value }) => ({ text: value, value: ['genre', 'equals', value] })
+});
 
 const BooksGrid = () => {
 
@@ -46,55 +45,55 @@ const BooksGrid = () => {
         token: loginCtx.token
     });
 
+    const PicEditCellComponent = data => (
+        <ImageEditCell
+            data={data}
+            serviceURL="actions/files/images"
+            token={loginCtx.token}
+        />
+    );
+
     return (
         <EntriesGridTemplate
             store={booksStore}
             dataRowRender={booksRowRender}
             storageKey='booksDataGridState'
+            defaultSortBy='name'
         >
             <EntriesGridTemplateBefore>
                 <Column
                     dataField="pic"
                     caption="Cover"
-                    allowFiltering={false}
                     allowSorting={false}
-                    width='10vw'
-                    editCellComponent={ImageEditCell}
+                    width={100}
+                    editCellComponent={PicEditCellComponent}
                 />
                 <Column
                     dataField="name"
                     dataType="string"
                     caption="Title"
-                    allowHeaderFiltering={false}
-                    sortOrder="asc"
-                >
-                    <RequiredRule />
-                </Column> 
+                    required
+                />
                 <Column
                     dataField="author"
                     dataType="string"
                     caption="Author"
-                    allowHeaderFiltering={false}
-                >
-                    <RequiredRule />
-                </Column>
+                    required
+                />
                 <Column
                     dataField="publisher"
                     dataType="string"
                     caption="Publisher"
-                    allowHeaderFiltering={false}
-                >
-                    <RequiredRule />
-                </Column>
+                    required
+                />
                 <Column
                     dataField="genre"
                     dataType="string"
                     caption="Genre"
                     editCellComponent={GenresEditCellComponent}
-                >
-                    <HeaderFilter dataSource={genresHeaderFilters} />
-                    <RequiredRule />
-                </Column>
+                    headerFilterDataSource={genresHeaderFilters}
+                    required
+                />
             </EntriesGridTemplateBefore>
         </EntriesGridTemplate>
     );

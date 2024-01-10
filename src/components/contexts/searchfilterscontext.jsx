@@ -15,14 +15,14 @@ export const SearchFiltersContextProvider = ({ children }) => {
         const searchDataFields = [
             'name', 'ageGroup', 'year', 'author', 'publisher', 'genre', 'type', 'tags'
         ];
-        const tokens = searchText.split(/ +/);
+        const tokens = searchText.split(/ +/).filter(token => token !== '');
 
         if (tokens.length) {
             let expr = [];
             for (const token of tokens) {
                 if (yearRangeRegex.test(token)) {
                     const [begin, end] = token.split('-');
-                    expr.push([['year', '>=', begin], ['year', '<=', end]]);
+                    expr.push([['year', '>=', begin], 'and', ['year', '<=', end]]);
                 } else {
                     const tokenFilterExpr = [];
                     for (const dataField of searchDataFields) {

@@ -1,6 +1,6 @@
 import { useState, useCallback, useContext } from "react";
 
-import { Button, Form } from "devextreme-react";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -15,18 +15,13 @@ const config = {
     timeout: 60 * 1000 // 60 seconds
 };
 
-const formData = {
-    Password: ''
-};
-
 const LoginPage = () => {
 
     const loginCtx = useContext(LoginContext);
 
-    const [fieldData, setFieldData] = useState(formData);
-    const onFormDataChanged = useCallback(event => {
-        const updatedFormData = { ...formData, [event.dataField]: event.value };
-        setFieldData(updatedFormData);
+    const [pwInput, setPwIn] = useState('');
+    const ChangeEventHandler = useCallback(event => {
+        setPwIn(event.target.value);
     }, []);
 
     const [showErrMsg, setShowErrMsg] = useState(false);
@@ -36,7 +31,7 @@ const LoginPage = () => {
         const data = {
             name: 'Ilay',
             email: 'ilay.daniel@gmail.com',
-            password: fieldData.Password
+            password: pwInput
         };
         axios.post(loginURL, JSON.stringify(data), config)
         .then(response => {
@@ -46,27 +41,27 @@ const LoginPage = () => {
         .catch(_err => {
             setShowErrMsg(true);
         });
-    }, [fieldData, nav, loginCtx]);
+    }, [pwInput, nav, loginCtx]);
 
     return (
         <div className="login-page-container">
-            <Form
-                formData={formData}
-                onFieldDataChanged={onFormDataChanged}
-                labelMode='outside'
-                labelLocation='left'
-                showColonAfterLabel={true}
-                width='50vw'
-            />
-            <Button
-                text='Login'
-                onClick={login}
-            />
-            {showErrMsg && (
-                <p className="err-msg">
-                    Password is incorrect
-                </p>
-            )}
+            <Form className="login-form">
+                <Form.Group
+                    className="mb-3"
+                    controlId="password-input"
+                >
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control onChange={ChangeEventHandler}/>
+                    {showErrMsg && (
+                        <Form.Text className="err-msg">
+                            <span className="err-msg">Password is incorrect</span>
+                        </Form.Text>
+                    )}
+                </Form.Group>
+                <Button onClick={login}>
+                    Login
+                </Button>
+            </Form>
         </div>
     )
 };

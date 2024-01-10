@@ -1,37 +1,36 @@
 import { useContext } from "react";
 
-import { Column, HeaderFilter, RequiredRule } from "devextreme-react/data-grid";
-import DataSource from "devextreme/data/data_source";
+import { Column } from "../../datagrid/configs";
+import { DataSource } from "../../datasource/datasource";
+import { RemoteStore } from "../../datasource/remotestore";
 
-import { RemoteStore } from "../../../store/remotestore";
-import SelectEditCell from "../../customcells/selecteditcell";
+import SelectEditCell from "../../datagrid/editingform/editcells/selecteditcell";
 import { LoginContext } from "../../contexts/logincontext";
 import EntriesGridTemplate, { EntriesGridTemplateBefore }
 from "../entriesgridtemplate/entriesgridtemplate";
 import audiovisualRowRender from "./audiovisualrowrender";
-import { valueByKey } from "../../../utils/valuebykey";
 
 const typesStore = new RemoteStore({
     serviceURL: 'actions/lists/audiovisualtype/',
     data2records: responseData => responseData.list,
-    byKey: valueByKey
 });
 
-const TypesEditCellComponent = ({ data }) => (
+const TypesEditCellComponent = data => (
     <SelectEditCell
         data={data}
-        options={new DataSource({
-            store: typesStore
+        dataSource={new DataSource({
+            store: typesStore,
+            map: ({ value }) => value,
+            sortBy: 'value'
         })}
-        valueExpr='value'
-        displayExpr='value'
+        typeaheadId="types-edit-cell-component"
     />
 );
 
-const typesHeaderFilters = {
+const typesHeaderFilters = new DataSource({
     store: typesStore,
-    map: ({ _id, value }) => ({ _id: _id, text: value, value: value })
-};
+    map: ({ value }) => ({ text: value, value: ['type', 'equals', value] })
+});
 
 const AudiovisualGrid = () => {
 
@@ -47,27 +46,24 @@ const AudiovisualGrid = () => {
         <EntriesGridTemplate
             store={audiovisualStore}
             dataRowRender={audiovisualRowRender}
-            storageKey='websitesDataGridState'
+            storageKey="websitesDataGridState"
+            defaultSortBy="name"
         >
             <EntriesGridTemplateBefore>
                 <Column
                     dataField="name"
                     dataType="string"
                     caption="Title"
-                    allowHeaderFiltering={false}
-                    sortOrder="asc"
-                >
-                    <RequiredRule/>
-                </Column>
+                    required
+                />
                 <Column
                     dataField="type"
                     dataType="string"
                     caption="Type"
                     editCellComponent={TypesEditCellComponent}
-                >
-                    <HeaderFilter dataSource={typesHeaderFilters}/>
-                    <RequiredRule/>
-                </Column>
+                    headerFilterDataSource={typesHeaderFilters}
+                    required
+                />
             </EntriesGridTemplateBefore>
         </EntriesGridTemplate>
     );

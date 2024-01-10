@@ -1,3 +1,4 @@
-.search-bar.dx-textbox {
+.search-bar.form-control {
     font-size: large;
+    width: 70vw;
 }

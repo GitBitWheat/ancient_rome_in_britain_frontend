@@ -3,7 +3,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px;
+}
+
+.login-form {
+    width: 50vw;
 }
 
 .err-msg {

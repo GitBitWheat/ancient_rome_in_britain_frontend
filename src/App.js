@@ -1,9 +1,7 @@
-import 'devextreme/dist/css/dx.light.css';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LoginContextProvider } from './components/contexts/logincontext';
 import { SearchFiltersContextProvider } from "./components/contexts/searchfilterscontext";
-import dxDataGrid from 'devextreme/ui/data_grid';
 
 import NavigationBar from './components/navigationbar/navigationbar';
 import HomePage from './components/homepage/homepage';
@@ -12,13 +10,6 @@ import InfoPage from './components/infopage/infopage';
 import LoginPage from './components/loginpage/loginpage';
 import ListsPage from './components/listspage/listspage';
 import info from './static/info.json';
-
-dxDataGrid.defaultOptions({
-    options: {
-        showBorders: true,
-        allowColumnResizing: true
-    }
-});
               
 function App() {
     return (

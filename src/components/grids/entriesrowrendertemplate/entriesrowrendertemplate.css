@@ -30,6 +30,12 @@
     padding-bottom: 1px;
 }
 
-.data-row-bottom-border {
+tr.data-row-bottom-border {
+    border-top: 0;
     border-bottom: 1px solid #ddd;
+}
+
+tr.data-row-no-border {
+    border-top: 0;
+    border-bottom: 0;
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, Fragment } from 'react';
-import { Button } from 'devextreme-react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 const replaceNewlinesWithBrs = text => text ? text.split('\n').reduce((prev, curr) => {
         if (prev.length > 0) {
@@ -28,9 +27,11 @@ const TextButtonModal = ({ btnText, modalHeaderText, modalBodyText }) => {
     return (
         <div>
             <Button
-                text={btnText}
+                variant='secondary'
                 onClick={onClick}
-            />
+            >
+                {btnText}
+            </Button>
             <Modal
                 show={isOpen}
                 onHide={handleClose}
